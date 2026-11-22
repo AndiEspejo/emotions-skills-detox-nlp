@@ -1,0 +1,13 @@
+# Designed for Google Colab (T4 GPU); executed locally with Python 3.12, torch 2.11, transformers 4.57, datasets 5.0.
+torch>=2.4
+transformers>=4.46,<5
+datasets>=3.0
+accelerate>=1.0
+scikit-learn
+seqeval
+sacrebleu
+pandas
+matplotlib
+seaborn
+sentencepiece
+protobuf
