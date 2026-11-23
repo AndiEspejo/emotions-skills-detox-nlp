@@ -37,13 +37,13 @@ El desarrollo completo está en el notebook [`nlp_finetuning_three_tasks.ipynb`]
 | Tarea | Métrica | Línea base clásica | Modelo fine-tuned | Mejor configuración | Entrenamiento final |
 | :--- | :--- | :-: | :-: | :--- | :-: |
 | Emociones | Macro-F1 | 0.420 | **0.523** | lr `5e-5`, batch 16, 4 épocas, un umbral por emoción | 6.4 min |
-| Habilidades | F1 por entidad | 0.184 | **0.628** | DeBERTa-v3, lr `5e-5`, batch 16, 6 épocas | 2.5 min |
-| Desintoxicación | BLEU | 63.4 | **66.4** | lr `1e-4`, batch 16, 4 épocas | 5.5 min |
+| Habilidades | F1 por entidad | 0.184 | **0.628** | DeBERTa-v3, lr `5e-5`, batch 16, 6 épocas (mejor *checkpoint*: época 5) | 2.5 min |
+| Desintoxicación | BLEU | 63.4 | **66.4** | lr `1e-4`, batch 16, 4 épocas (mejor *checkpoint*: época 1) | 5.5 min |
 
 Métricas complementarias:
 
-- **Emociones:** Micro-F1 de 0.603, frente a 0.554 de la línea base. Las mayores diferencias aparecen en emociones que
-  dependen del contexto, como *curiosity* (0.55 vs. 0.37) y *confusion* (0.49 vs. 0.33).
+- **Emociones:** Micro-F1 de 0.603, frente a 0.554 de la línea base. Las diferencias son grandes en emociones que
+  dependen del contexto, como *curiosity* (0.55 vs. 0.37), *confusion* (0.49 vs. 0.33) y *disappointment* (0.34 vs. 0.15).
 - **Habilidades:** F1 de 0.538 en `SKILL` y de 0.709 en `KNOWLEDGE`. En las entidades que no aparecen en entrenamiento, el
   modelo recupera el 53 % de las habilidades y el 65 % de los conocimientos; el diccionario no recupera ninguna.
 - **Desintoxicación:** el 86.9 % de las salidas es no tóxico según un clasificador independiente (línea base: 85.8 %;
@@ -57,8 +57,8 @@ Los tiempos corresponden a una GPU NVIDIA RTX 5070 Ti; en una T4 de Colab el ent
   `2e-5`, el modelo no aprendió nada en la muestra (F1 = 0) y se quedó prediciendo "ninguna emoción".
 - En la extracción de habilidades, DeBERTa-v3 superó a BERT y a JobBERT con todos los *learning rates* probados: la
   arquitectura aportó más que el pre-entrenamiento en el dominio de las ofertas de empleo.
-- Ajustar un umbral por emoción en validación subió el Macro-F1 de 0.509 a 0.523, porque las emociones poco frecuentes
-  rara vez superan un umbral de 0.5.
+- Ajustar un umbral por emoción en validación subió el Macro-F1 de 0.509 (con un umbral global de 0.35) a 0.523, porque
+  un único umbral no sirve a la vez para las emociones frecuentes y para las poco frecuentes.
 - En la desintoxicación, eliminar palabras ofensivas resultó una línea base competitiva, porque muchas reescrituras
   humanas son eliminaciones. La ventaja del modelo está en los casos que requieren reformular.
 
@@ -116,4 +116,4 @@ variable de entorno `SMOKE=1` se ejecuta una versión reducida en pocos minutos,
 ---
 
 Proyecto 2 del curso *Fundamentos de Procesamiento de Lenguaje Natural*, Ingeniería de Sistemas, Universidad de
-Antioquia (Prof. Antonio Jesús Tamayo Herrera). Autor: Jefferson Espejo.
+Antioquia (Prof. Antonio Jesús Tamayo Herrera, Ph.D.). Autor: Jefferson Espejo.
