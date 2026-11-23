@@ -8,6 +8,8 @@ reconocer emociones en comentarios, extraer requisitos de ofertas de empleo y re
 El desarrollo completo está en el notebook [`nlp_finetuning_three_tasks.ipynb`](./nlp_finetuning_three_tasks.ipynb)
 ([abrir en Google Colab](https://colab.research.google.com/github/AndiEspejo/emotions-skills-detox-nlp/blob/main/nlp_finetuning_three_tasks.ipynb)).
 
+**Video de sustentación:** [YouTube](https://www.youtube.com/watch?v=ufITSChDEM8) · **Publicación:** [LinkedIn](https://www.linkedin.com/posts/jeffespejo_nlp-machinelearning-deeplearning-share-7530467502133280768-uXDk/)
+
 ## Problemas abordados
 
 | Tarea | Tipo de problema | Base de datos | Entrada → salida | Modelo |
