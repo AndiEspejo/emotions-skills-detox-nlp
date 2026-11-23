@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .venv/
+.venv5/
 
 # Training artifacts (models are large; publish them on the Hugging Face Hub instead)
 outputs/

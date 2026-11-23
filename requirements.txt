@@ -1,6 +1,6 @@
-# Designed for Google Colab (T4 GPU); executed locally with Python 3.12, torch 2.11, transformers 4.57, datasets 5.0.
+# Designed for Google Colab (T4 GPU). Tested with transformers 4.57 and 5.24 (Python 3.12, torch 2.11).
 torch>=2.4
-transformers>=4.46,<5
+transformers>=4.46
 datasets>=3.0
 accelerate>=1.0
 scikit-learn

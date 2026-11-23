@@ -84,17 +84,20 @@ Los tiempos corresponden a una GPU NVIDIA RTX 5070 Ti; en una T4 de Colab el ent
 | Desintoxicación | [`jeffespejo/bart-base-paradetox-udea`](https://huggingface.co/jeffespejo/bart-base-paradetox-udea) |
 
 ```python
-from transformers import pipeline
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 
 habilidades = pipeline("token-classification", model="jeffespejo/deberta-v3-base-skillspan-udea",
                        aggregation_strategy="simple")
 print(habilidades("You will design and deploy NLP models. Knowledge of Docker and AWS is a plus."))
 
-detox = pipeline("text2text-generation", model="jeffespejo/bart-base-paradetox-udea")
-print(detox("The referee was a complete idiot and ruined the damn game.", num_beams=4))
+tokenizer = AutoTokenizer.from_pretrained("jeffespejo/bart-base-paradetox-udea")
+detox = AutoModelForSeq2SeqLM.from_pretrained("jeffespejo/bart-base-paradetox-udea")
+inputs = tokenizer("The referee was a complete idiot and ruined the damn game.", return_tensors="pt")
+print(tokenizer.decode(detox.generate(**inputs, num_beams=4, max_length=128)[0], skip_special_tokens=True))
 ```
 
-El modelo de emociones es multi-etiqueta y usa un umbral por emoción; la ficha del modelo explica cómo cargarlo.
+El código funciona con `transformers` 4.46 o superior, incluida la versión 5. El modelo de emociones es multi-etiqueta
+y usa un umbral por emoción; la ficha del modelo explica cómo cargarlo.
 
 ## Ejecución
 
